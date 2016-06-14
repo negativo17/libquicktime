@@ -29,7 +29,7 @@ BuildRequires:	libXt-devel
 BuildRequires:	libXv-devel
 BuildRequires:	pkgconfig(alsa) >= 0.9
 BuildRequires:	pkgconfig(libdv) >= 0.102
-BuildRequires:	pkgconfig(libpng12) >= 1.2.23
+BuildRequires:	pkgconfig(libpng) >= 1.2.23
 BuildRequires:	pkgconfig(libswscale)
 BuildRequires:  pkgconfig(schroedinger-1.0) >= 1.0.5
 BuildRequires:	pkgconfig(x264) >= 0.48
