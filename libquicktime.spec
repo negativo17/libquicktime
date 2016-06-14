@@ -1,7 +1,6 @@
 Name:       libquicktime
 Version:    1.2.4
 Release:    1%{?dist}
-Epoch:      1
 Summary:    Library for reading and writing Quicktime files
 License:	LGPLv2+
 
@@ -112,5 +111,5 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}*.so
 
 %changelog
-* Tue Jun 14 2016 Simone Caronni <negativo17@gmail.com> - 1.2.4-22
+* Tue Jun 14 2016 Simone Caronni <negativo17@gmail.com> - 1.2.4-1
 - First build.
