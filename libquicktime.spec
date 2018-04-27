@@ -1,15 +1,16 @@
 Name:       libquicktime
 Version:    1.2.4
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Library for reading and writing Quicktime files
 License:	LGPLv2+
-
 URL:        http://libquicktime.sourceforge.net/
 
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# ARCH/Gentoo Linux
-Patch0:     ffmpeg-2.0.patch
-Patch1:     ffmpeg-3.0.patch
+# https://gitweb.gentoo.org/repo/gentoo.git/tree/media-libs/libquicktime
+Patch0:     libquicktime-1.2.4-ffmpeg-2.patch
+Patch1:     libquicktime-1.2.4-CVE-2016-2399.patch
+Patch2:     libquicktime-1.2.4-ffmpeg-3.patch
+Patch3:     libquicktime-1.2.4-ffmpeg-4.patch
 
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -42,11 +43,7 @@ with decent compression codecs for end user applications.
 Summary:	Utilities for working with Quicktime files
 
 %description utils
-A simple and stable library, which can create reasonable compatible Quicktime
-and AVI files either uncompressed (for high-end or production applications) or
-with decent compression codecs for end user applications.
-
-This package contains utility programs and additional tools.
+This package contains utility programs for working with Quicktime files.
 
 %package devel
 Summary:	Development files for libquicktime
@@ -62,9 +59,7 @@ The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
+%autosetup -p1
 
 %build
 autoreconf -vif
@@ -73,17 +68,15 @@ autoreconf -vif
 	--with-libdv \
 	--without-doxygen
 
-make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot} INSTALL="install -p"
+%make_install
 find %{buildroot} -name "*.la" -delete
 
 %find_lang %{name}
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files -f %{name}.lang
 %license COPYING
@@ -111,5 +104,9 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}*.so
 
 %changelog
+* Fri Apr 27 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-2
+- Add CVE and FFmpeg 4 patches.
+- Update SPEC file.
+
 * Tue Jun 14 2016 Simone Caronni <negativo17@gmail.com> - 1.2.4-1
 - First build.
