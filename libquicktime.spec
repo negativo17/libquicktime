@@ -1,8 +1,8 @@
 Name:       libquicktime
 Version:    1.2.4
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Library for reading and writing Quicktime files
-License:	LGPLv2+
+License:    LGPLv2+
 URL:        http://libquicktime.sourceforge.net/
 
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -12,27 +12,28 @@ Patch1:     libquicktime-1.2.4-CVE-2016-2399.patch
 Patch2:     libquicktime-1.2.4-ffmpeg-3.patch
 Patch3:     libquicktime-1.2.4-ffmpeg-4.patch
 
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:  autoconf
+BuildRequires:  automake
 BuildRequires:  faac-devel >= 1.24
-BuildRequires:	faad2-devel >= 2.0
+BuildRequires:  faad2-devel >= 2.0
+BuildRequires:  gcc
 BuildRequires:  gettext-devel
-BuildRequires:	gtk2-devel >= 2.4.0
-BuildRequires:	lame-devel >= 3.93
-BuildRequires:	libdv-devel
-BuildRequires:	libGLU-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	libtool
-BuildRequires:	libvorbis-devel
-BuildRequires:	libXaw-devel
-BuildRequires:	libXt-devel
-BuildRequires:	libXv-devel
-BuildRequires:	pkgconfig(alsa) >= 0.9
-BuildRequires:	pkgconfig(libdv) >= 0.102
-BuildRequires:	pkgconfig(libpng) >= 1.2.23
-BuildRequires:	pkgconfig(libswscale)
+BuildRequires:  gtk2-devel >= 2.4.0
+BuildRequires:  lame-devel >= 3.93
+BuildRequires:  libdv-devel
+BuildRequires:  libGLU-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  libtool
+BuildRequires:  libvorbis-devel
+BuildRequires:  libXaw-devel
+BuildRequires:  libXt-devel
+BuildRequires:  libXv-devel
+BuildRequires:  pkgconfig(alsa) >= 0.9
+BuildRequires:  pkgconfig(libdv) >= 0.102
+BuildRequires:  pkgconfig(libpng) >= 1.2.23
+BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(schroedinger-1.0) >= 1.0.5
-BuildRequires:	pkgconfig(x264) >= 0.48
+BuildRequires:  pkgconfig(x264) >= 0.48
 
 %description
 A simple and stable library, which can create reasonable compatible Quicktime
@@ -40,15 +41,15 @@ and AVI files either uncompressed (for high-end or production applications) or
 with decent compression codecs for end user applications.
 
 %package utils
-Summary:	Utilities for working with Quicktime files
+Summary:    Utilities for working with Quicktime files
 
 %description utils
 This package contains utility programs for working with Quicktime files.
 
 %package devel
-Summary:	Development files for libquicktime
-Requires:	%{name}%{?_isa} = %{version}-%{release}
-Requires:	zlib-devel
+Summary:    Development files for libquicktime
+Requires:   %{name}%{?_isa} = %{version}-%{release}
+Requires:   zlib-devel
 
 %description devel
 A simple and stable library, which can create reasonable compatible Quicktime
@@ -64,9 +65,9 @@ developing applications that use %{name}.
 %build
 autoreconf -vif
 %configure \
-	--disable-static \
-	--with-libdv \
-	--without-doxygen
+  --disable-static \
+  --with-libdv \
+  --without-doxygen
 
 %make_build
 
@@ -104,6 +105,10 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}*.so
 
 %changelog
+* Wed Sep 26 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-3
+- Add gcc as build requirement.
+- Fix rpmlint warnings.
+
 * Fri Apr 27 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-2
 - Add CVE and FFmpeg 4 patches.
 - Update SPEC file.
