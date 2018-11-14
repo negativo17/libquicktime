@@ -1,6 +1,6 @@
 Name:       libquicktime
 Version:    1.2.4
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    Library for reading and writing Quicktime files
 License:    LGPLv2+
 URL:        http://libquicktime.sourceforge.net/
@@ -105,6 +105,9 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}*.so
 
 %changelog
+* Wed Nov 14 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-4
+- Rebuild for FFMpeg update.
+
 * Wed Sep 26 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-3
 - Add gcc as build requirement.
 - Fix rpmlint warnings.
