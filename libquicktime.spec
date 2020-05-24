@@ -1,6 +1,6 @@
 Name:       libquicktime
 Version:    1.2.4
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Library for reading and writing Quicktime files
 License:    LGPLv2+
 URL:        http://libquicktime.sourceforge.net/
@@ -14,8 +14,6 @@ Patch3:     libquicktime-1.2.4-ffmpeg-4.patch
 
 BuildRequires:  autoconf
 BuildRequires:  automake
-BuildRequires:  faac-devel >= 1.24
-BuildRequires:  faad2-devel >= 2.0
 BuildRequires:  gcc
 BuildRequires:  gettext-devel
 BuildRequires:  gtk2-devel >= 2.4.0
@@ -66,8 +64,21 @@ developing applications that use %{name}.
 autoreconf -vif
 %configure \
   --disable-static \
+  --with-alsa \
+  --with-ffmpeg \
+  --with-gtk \
+  --with-lame \
   --with-libdv \
-  --without-doxygen
+  --with-libdv \
+  --with-libjpeg \
+  --with-libpng \
+  --with-opengl \
+  --with-schroedinger \
+  --with-x264 \
+  --with-x \
+  --without-doxygen \
+  --without-faac
+  --without-faad2
 
 %make_build
 
@@ -105,6 +116,9 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/%{name}*.so
 
 %changelog
+* Fri Apr 03 2020 Simone Caronni <negativo17@gmail.com> - 1.2.4-5
+- Remove FAAC/FAAD2 dependencies.
+
 * Wed Nov 14 2018 Simone Caronni <negativo17@gmail.com> - 1.2.4-4
 - Rebuild for FFMpeg update.
 
